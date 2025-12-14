@@ -1,0 +1,414 @@
+/* Estilos principales con colores pastel */
+.app-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffd6e0 0%, #d6eaff 25%, #d6ffea 50%, #fff9d6 75%, #e6d6ff 100%);
+}
+
+/* Botones pastel */
+.btn-pastel-primary {
+  background-color: #d6eaff;
+  color: #374151;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.btn-pastel-primary:hover {
+  background-color: #c2dfff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-pastel-success {
+  background-color: #d6ffea;
+  color: #374151;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-pastel-success:hover {
+  background-color: #c2ffdf;
+  transform: translateY(-2px);
+}
+
+.btn-pastel-warning {
+  background-color: #fff9d6;
+  color: #374151;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-pastel-warning:hover {
+  background-color: #fff6c2;
+  transform: translateY(-2px);
+}
+
+.btn-pastel-danger {
+  background-color: #ffd6e0;
+  color: #374151;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-pastel-danger:hover {
+  background-color: #ffc2d1;
+  transform: translateY(-2px);
+}
+
+/* Inputs pastel */
+.input-pastel {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid rgba(230, 214, 255, 0.5);
+  border-radius: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s;
+  font-size: 0.875rem;
+}
+
+.input-pastel:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(230, 214, 255, 0.5);
+  border-color: rgba(230, 214, 255, 0.8);
+  background-color: white;
+}
+
+/* Tarjetas pastel */
+.card-pastel {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s;
+  backdrop-filter: blur(10px);
+}
+
+.card-pastel:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Estados de tareas pastel */
+.task-item-pastel {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  margin-bottom: 0.75rem;
+  transition: all 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: between;
+  align-items: center;
+}
+
+.task-completed-pastel {
+  background: linear-gradient(135deg, #d6ffea 0%, #c2ffdf 100%);
+  border-color: rgba(194, 255, 223, 0.5);
+}
+
+.task-pending-pastel {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.task-item-pastel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Badges pastel */
+.badge-pastel {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid;
+}
+
+.badge-success-pastel {
+  background-color: rgba(214, 255, 234, 0.6);
+  border-color: rgba(194, 255, 223, 0.8);
+  color: #374151;
+}
+
+.badge-warning-pastel {
+  background-color: rgba(255, 249, 214, 0.6);
+  border-color: rgba(255, 246, 194, 0.8);
+  color: #374151;
+}
+
+/* Login pastel */
+.login-container-pastel {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ffd6e0 0%, #d6eaff 50%, #e6d6ff 100%);
+  padding: 1rem;
+}
+
+.login-card-pastel {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  width: 100%;
+  max-width: 24rem;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.login-input-pastel {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid rgba(230, 214, 255, 0.4);
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1rem;
+  transition: all 0.3s;
+}
+
+.login-input-pastel:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(230, 214, 255, 0.6);
+  border-color: rgba(230, 214, 255, 0.8);
+  background: white;
+}
+
+.login-button-pastel {
+  width: 100%;
+  background: linear-gradient(135deg, #d6eaff 0%, #e6d6ff 100%);
+  color: #374151;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.875rem;
+}
+
+.login-button-pastel:hover {
+  background: linear-gradient(135deg, #c2dfff 0%, #dcc2ff 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.login-button-pastel:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Header pastel */
+.header-pastel {
+  background: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+/* Animaciones */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.5s ease-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-in;
+}
+
+/* Estados vacíos */
+.empty-state-pastel {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #6b7280;
+}
+
+.empty-state-pastel p {
+  margin-top: 1rem;
+  font-size: 1.125rem;
+}
+
+/* Loading spinner */
+.loading-spinner-pastel {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid transparent;
+  border-top: 2px solid #e6d6ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Utilidades de texto */
+.text-pastel-pink {
+  color: #ff85a2;
+}
+
+.text-pastel-blue {
+  color: #85b8ff;
+}
+
+.text-pastel-green {
+  color: #85ffb8;
+}
+
+.text-pastel-purple {
+  color: #b885ff;
+}
+
+/* Flex utilities */
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .login-card-pastel {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .task-item-pastel {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .task-item-pastel button {
+    align-self: flex-end;
+  }
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(230, 214, 255, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(230, 214, 255, 0.6);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(230, 214, 255, 0.8);
+}
+
+/* Estilos adicionales para la edición de tareas */
+.edit-mode {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 2px solid rgba(230, 214, 255, 0.8) !important;
+}
+
+.stats-card {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.stats-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Botones pequeños para acciones */
+.btn-small {
+  padding: 0.4rem 0.8rem !important;
+  font-size: 0.75rem !important;
+}
+
+/* Grupo de botones */
+.btn-group {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Responsive para botones en móviles */
+@media (max-width: 640px) {
+  .btn-group {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .btn-group button {
+    width: 100%;
+  }
+  
+  .task-item-pastel {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .task-item-pastel > div:last-child {
+    align-self: stretch;
+    margin-top: 1rem;
+  }
+}
+
+/* Efectos de transición suaves */
+.smooth-transition {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Indicador de tarea editada */
+.edited-indicator {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  font-style: italic;
+}
