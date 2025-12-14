@@ -69,7 +69,6 @@ app.get('/users', (req, res) => {
 
 const PORT = process.env.PORT || 3001;
 
-// ⚠️ CRÍTICO: Express escucha en 0.0.0.0 por defecto
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Servidor Express corriendo en puerto ${PORT}`);
+  console.log(`✅ Servidor corriendo en puerto ${PORT}`);
 });
