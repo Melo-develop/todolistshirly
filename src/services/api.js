@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
+// ✅ Usar variable de entorno
 const API = axios.create({
-  baseURL: 'http://localhost:4000',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3001',
 });
 
 API.interceptors.response.use(
@@ -16,7 +17,7 @@ API.interceptors.response.use(
 export const taskAPI = {
   getTasks: () => API.get('/tasks'),
   createTask: (task) => API.post('/tasks', task),
-  updateTask: (id, task) => API.patch(`/tasks/${id}`, task),
+  updateTask: (id, task) => API.put(`/tasks/${id}`, task), // ← Cambié PATCH a PUT
   deleteTask: (id) => API.delete(`/tasks/${id}`),
 };
 
@@ -24,15 +25,15 @@ export const authAPI = {
   login: async (credentials) => {
     // Primero buscar por usuario
     const response = await API.get('/users', { 
-      params: { username: credentials.username } 
+      params: { 
+        username: credentials.username,
+        password: credentials.password // ← Pasar password también
+      } 
     });
     
-    // Verificar si se encontró el usuario y si la contraseña coincide
-    const user = response.data.find(u => u.password === credentials.password);
-    
-    // Devolver un objeto que simule la respuesta de la API
+    // Tu backend Express ya filtra por username y password
     return { 
-      data: user ? [user] : [] 
+      data: response.data
     };
   },
 };

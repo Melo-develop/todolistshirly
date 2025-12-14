@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
+import { taskAPI } from '../services/api';
+import { toast } from 'react-toastify';
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
@@ -9,22 +11,27 @@ export default function Dashboard() {
   const [searchTerm, setSearchTerm] = useState('');
   const [editingTask, setEditingTask] = useState(null);
   const [editText, setEditText] = useState('');
+  const [loading, setLoading] = useState(true);
 
-  // Cargar tareas del localStorage al iniciar
+  // Cargar tareas desde la API al iniciar
   useEffect(() => {
-    const savedTasks = localStorage.getItem('team-todo-tasks');
-    if (savedTasks) {
-      setTasks(JSON.parse(savedTasks));
-    }
+    fetchTasks();
   }, []);
 
-  // Guardar tareas en localStorage cuando cambien
-  useEffect(() => {
-    localStorage.setItem('team-todo-tasks', JSON.stringify(tasks));
-  }, [tasks]);
+  const fetchTasks = async () => {
+    try {
+      const response = await taskAPI.getTasks();
+      setTasks(response.data);
+    } catch (error) {
+      console.error('Error al cargar tareas:', error);
+      toast.error('Error al cargar las tareas');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Crear nueva tarea
-  const handleAddTask = (e) => {
+  const handleAddTask = async (e) => {
     e.preventDefault();
     if (!newTask.trim()) return;
 
@@ -37,27 +44,49 @@ export default function Dashboard() {
       updatedAt: new Date().toISOString()
     };
 
-    setTasks(prev => [task, ...prev]);
-    setNewTask('');
+    try {
+      await taskAPI.createTask(task);
+      setTasks(prev => [task, ...prev]);
+      setNewTask('');
+      toast.success('✅ Tarea creada');
+    } catch (error) {
+      console.error('Error al crear tarea:', error);
+      toast.error('Error al crear la tarea');
+    }
   };
 
   // Marcar tarea como completada/pendiente
-  const toggleTask = (id) => {
-    setTasks(prev =>
-      prev.map(task =>
-        task.id === id ? { 
-          ...task, 
-          completed: !task.completed,
-          updatedAt: new Date().toISOString()
-        } : task
-      )
-    );
+  const toggleTask = async (id) => {
+    const task = tasks.find(t => t.id === id);
+    const updatedTask = {
+      ...task,
+      completed: !task.completed,
+      updatedAt: new Date().toISOString()
+    };
+
+    try {
+      await taskAPI.updateTask(id, updatedTask);
+      setTasks(prev =>
+        prev.map(t => t.id === id ? updatedTask : t)
+      );
+      toast.success(updatedTask.completed ? '✅ Tarea completada' : '⏳ Tarea marcada como pendiente');
+    } catch (error) {
+      console.error('Error al actualizar tarea:', error);
+      toast.error('Error al actualizar la tarea');
+    }
   };
 
   // Eliminar tarea
-  const deleteTask = (id) => {
-    if (window.confirm('¿Estás seguro de que quieres eliminar esta tarea?')) {
+  const deleteTask = async (id) => {
+    if (!window.confirm('¿Estás seguro de que quieres eliminar esta tarea?')) return;
+
+    try {
+      await taskAPI.deleteTask(id);
       setTasks(prev => prev.filter(task => task.id !== id));
+      toast.success('🗑️ Tarea eliminada');
+    } catch (error) {
+      console.error('Error al eliminar tarea:', error);
+      toast.error('Error al eliminar la tarea');
     }
   };
 
@@ -74,24 +103,31 @@ export default function Dashboard() {
   };
 
   // Guardar edición de tarea
-  const saveEdit = (id) => {
+  const saveEdit = async (id) => {
     if (!editText.trim()) {
-      alert('El texto de la tarea no puede estar vacío');
+      toast.error('El texto de la tarea no puede estar vacío');
       return;
     }
 
-    setTasks(prev =>
-      prev.map(task =>
-        task.id === id ? { 
-          ...task, 
-          text: editText.trim(),
-          updatedAt: new Date().toISOString()
-        } : task
-      )
-    );
-    
-    setEditingTask(null);
-    setEditText('');
+    const task = tasks.find(t => t.id === id);
+    const updatedTask = {
+      ...task,
+      text: editText.trim(),
+      updatedAt: new Date().toISOString()
+    };
+
+    try {
+      await taskAPI.updateTask(id, updatedTask);
+      setTasks(prev =>
+        prev.map(t => t.id === id ? updatedTask : t)
+      );
+      setEditingTask(null);
+      setEditText('');
+      toast.success('✏️ Tarea editada');
+    } catch (error) {
+      console.error('Error al editar tarea:', error);
+      toast.error('Error al editar la tarea');
+    }
   };
 
   // Filtrar tareas por búsqueda
@@ -100,12 +136,20 @@ export default function Dashboard() {
     task.text.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-pastel-pink/20 via-pastel-blue/20 to-pastel-purple/20 flex items-center justify-center">
+        <div className="text-2xl font-bold text-gray-700">Cargando tareas...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-pastel-pink/20 via-pastel-blue/20 to-pastel-purple/20">
       {/* Header */}
       <header className="header-pastel">
         <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex-between">
-          <h1 className="text-2xl font-bold text-gray-800">LISTA DE TAREASS</h1>
+          <h1 className="text-2xl font-bold text-gray-800">LISTA DE TAREAS</h1>
           <div className="flex items-center space-x-4">
             <span className="text-gray-700">Hola, <strong>{user?.username}</strong></span>
             <Link 
@@ -168,7 +212,7 @@ export default function Dashboard() {
 
           {filteredTasks.length === 0 ? (
             <div className="empty-state-pastel">
-              <div className="text-4xl mb-4"></div>
+              <div className="text-4xl mb-4">📝</div>
               <p>
                 {searchTerm 
                   ? 'No se encontraron tareas que coincidan con tu búsqueda' 
