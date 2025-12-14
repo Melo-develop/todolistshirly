@@ -138,29 +138,29 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-100 via-blue-100 to-purple-100 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-pastel-pink/20 via-pastel-blue/20 to-pastel-purple/20 flex items-center justify-center">
         <div className="text-2xl font-bold text-gray-700">Cargando tareas...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-blue-100 to-purple-100">
+    <div className="min-h-screen bg-gradient-to-br from-pastel-pink/20 via-pastel-blue/20 to-pastel-purple/20">
       {/* Header */}
-      <header className="bg-white shadow-md">
-        <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
+      <header className="header-pastel">
+        <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex-between">
           <h1 className="text-2xl font-bold text-gray-800">LISTA DE TAREAS</h1>
           <div className="flex items-center space-x-4">
             <span className="text-gray-700">Hola, <strong>{user?.username}</strong></span>
             <Link 
               to="/usuarios" 
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition"
+              className="btn-pastel-primary"
             >
               Buscar Usuarios
             </Link>
             <button
               onClick={logout}
-              className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition"
+              className="btn-pastel-danger"
             >
               Cerrar sesión
             </button>
@@ -170,7 +170,7 @@ export default function Dashboard() {
 
       <main className="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         {/* Formulario para crear tareas */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div className="card-pastel p-6 mb-6 animate-fade-in">
           <h2 className="text-2xl font-bold mb-4 text-gray-800">Crear Nueva Tarea</h2>
           <form onSubmit={handleAddTask} className="flex gap-3">
             <input
@@ -178,11 +178,11 @@ export default function Dashboard() {
               value={newTask}
               onChange={(e) => setNewTask(e.target.value)}
               placeholder="¿Qué necesitas hacer?"
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="input-pastel flex-1"
             />
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition whitespace-nowrap"
+              className="btn-pastel-primary whitespace-nowrap"
             >
               Agregar Tarea
             </button>
@@ -190,30 +190,30 @@ export default function Dashboard() {
         </div>
 
         {/* Buscador de tareas */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div className="card-pastel p-6 mb-6 animate-fade-in">
           <h3 className="text-xl font-bold mb-4 text-gray-800">Buscar Tareas</h3>
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Buscar por autor o texto de tarea..."
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="input-pastel"
           />
         </div>
 
         {/* Lista de tareas */}
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <div className="flex justify-between items-center mb-6">
+        <div className="card-pastel p-6 animate-fade-in">
+          <div className="flex-between mb-6">
             <h2 className="text-2xl font-bold text-gray-800">Tareas del Equipo</h2>
-            <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold">
+            <span className="badge-pastel badge-warning-pastel">
               {filteredTasks.length} tareas
             </span>
           </div>
 
           {filteredTasks.length === 0 ? (
-            <div className="text-center py-12">
+            <div className="empty-state-pastel">
               <div className="text-4xl mb-4">📝</div>
-              <p className="text-gray-500">
+              <p>
                 {searchTerm 
                   ? 'No se encontraron tareas que coincidan con tu búsqueda' 
                   : 'No hay tareas creadas. ¡Crea la primera!'
@@ -225,8 +225,8 @@ export default function Dashboard() {
               {filteredTasks.map(task => (
                 <div
                   key={task.id}
-                  className={`border rounded-lg p-4 flex justify-between items-start ${
-                    task.completed ? 'bg-gray-50 border-gray-300' : 'bg-white border-blue-200'
+                  className={`task-item-pastel ${
+                    task.completed ? 'task-completed-pastel' : 'task-pending-pastel'
                   }`}
                 >
                   <div className="flex-1">
@@ -237,19 +237,19 @@ export default function Dashboard() {
                           type="text"
                           value={editText}
                           onChange={(e) => setEditText(e.target.value)}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="input-pastel"
                           autoFocus
                         />
                         <div className="flex gap-2">
                           <button
                             onClick={() => saveEdit(task.id)}
-                            className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition text-sm"
+                            className="btn-pastel-success text-sm"
                           >
                             Guardar
                           </button>
                           <button
                             onClick={cancelEdit}
-                            className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg transition text-sm"
+                            className="btn-pastel-warning text-sm"
                           >
                             Cancelar
                           </button>
@@ -265,7 +265,7 @@ export default function Dashboard() {
                             {task.text}
                           </p>
                           {task.completed && (
-                            <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-semibold">
+                            <span className="badge-pastel badge-success-pastel">
                               Completada
                             </span>
                           )}
@@ -297,22 +297,20 @@ export default function Dashboard() {
                       <button
                         onClick={() => toggleTask(task.id)}
                         className={`${
-                          task.completed 
-                            ? 'bg-yellow-500 hover:bg-yellow-600' 
-                            : 'bg-green-500 hover:bg-green-600'
-                        } text-white px-4 py-2 rounded-lg transition whitespace-nowrap`}
+                          task.completed ? 'btn-pastel-warning' : 'btn-pastel-success'
+                        } whitespace-nowrap`}
                       >
                         {task.completed ? 'Desmarcar' : 'Completar'}
                       </button>
                       <button
                         onClick={() => startEdit(task)}
-                        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition whitespace-nowrap"
+                        className="btn-pastel-primary whitespace-nowrap"
                       >
                         Editar
                       </button>
                       <button
                         onClick={() => deleteTask(task.id)}
-                        className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition whitespace-nowrap"
+                        className="btn-pastel-danger whitespace-nowrap"
                       >
                         Eliminar
                       </button>
@@ -326,26 +324,26 @@ export default function Dashboard() {
 
         {/* Estadísticas */}
         {tasks.length > 0 && (
-          <div className="bg-white rounded-lg shadow-md p-6 mt-6">
+          <div className="card-pastel p-6 mt-6 animate-fade-in">
             <h3 className="text-xl font-bold mb-4 text-gray-800">Estadísticas</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-              <div className="bg-blue-100 rounded-lg p-4">
+              <div className="bg-pastel-blue/30 rounded-lg p-4">
                 <p className="text-2xl font-bold text-gray-800">{tasks.length}</p>
                 <p className="text-sm text-gray-600">Total</p>
               </div>
-              <div className="bg-green-100 rounded-lg p-4">
+              <div className="bg-pastel-green/30 rounded-lg p-4">
                 <p className="text-2xl font-bold text-gray-800">
                   {tasks.filter(t => t.completed).length}
                 </p>
                 <p className="text-sm text-gray-600">Completadas</p>
               </div>
-              <div className="bg-yellow-100 rounded-lg p-4">
+              <div className="bg-pastel-yellow/30 rounded-lg p-4">
                 <p className="text-2xl font-bold text-gray-800">
                   {tasks.filter(t => !t.completed).length}
                 </p>
                 <p className="text-sm text-gray-600">Pendientes</p>
               </div>
-              <div className="bg-purple-100 rounded-lg p-4">
+              <div className="bg-pastel-purple/30 rounded-lg p-4">
                 <p className="text-2xl font-bold text-gray-800">
                   {tasks.filter(t => t.author === user.username).length}
                 </p>
